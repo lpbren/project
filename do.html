@@ -1,0 +1,84 @@
+<html>
+    <head>
+        
+        <title>project</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootflat.github.io/bootflat/css/bootflat.css">
+    <script src="./bootflat.github.io-master/css/site.min.css"></script>
+    <script src="https://github.com/bootflat/bootflat.github.io/blob/master/css/site.css"></script>
+    </head>
+<body>
+    <div class="header">
+
+        <nav>
+            <img src="file:///C:\Users\gutie\Pictures\logo.png" alt="image" class="logo">
+             
+        </nav>
+
+        <div class="content">
+            <h1>I want to...</h1>
+            <form>
+                <input type="text" placeholder="what to do!">
+                <div id="random-activity"></div>
+               <button id="anything" class="btn-primary">do anything</button>
+            </form>
+
+            <div class="category-list">
+                <div class="category">
+                    <button id="priceRange" class="btn-primary"> price range</button> 
+                </div>
+                <div class="category">
+                    <button id="new" class="btn-primary"> something new</button>  
+                </div>
+                <div class="Weather">
+                <div class="response"></div>
+                <div class="accessibility"></div>
+                <div class="cityName"></div>
+                <div class="description"></div>
+                <div class="wind"></div>
+                <div class="humidity"></div>
+                <div class="temperature"></div></p> 
+            </div>
+            </div>
+        </div>
+     </div>
+
+
+
+
+
+    <script type ="text/javascript">
+        //var activityType;
+        var APIKey = "166a433c57516f51dfab1f7edaed8413";
+        var queryURL = "http://www.boredapi.com/api/activity";
+        var queryURL2 = "https://api.openweathermap.org/data/2.5/weather?" +
+      "q=Los Angeles&appid=" + APIKey;
+      $("#anything").on("click", function(event){
+        //event.preventDefault();
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response){
+           // $(".response").text(JSON.stringify(response));
+           // $(".accessibility").text(response.accessibility);
+            $("#random-activity").text(JSON.stringify(response.activity));
+            console.log(response);
+            });
+       });
+       $.ajax({
+           url:queryURL2,
+           method: "GET"
+       }).then(function(response){
+      // console.log("R"+response);
+       $(".cityName").text(response.name);
+       $(".description").text(response.weather.description);
+       $(".wind").text("Wind Speed: " + response.wind.speed);
+       $(".humidity").text("Humidity: " + response.main.humidity);
+       $(".temperature").text("Temperature: " + response.main.temp);
+       });
+       //console.log(response);
+    </script>
+</body>
+</html>
